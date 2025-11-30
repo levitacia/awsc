@@ -1,9 +1,15 @@
 package main
 
 import (
-	"fmt"
+	"awsc/logger"
+	"os"
 )
 
 func main() {
-	fmt.Println("Hello, World!")
+	env := os.Getenv("APP_ENV")
+	if env == "" {
+		env = "development"
+	}
+	logger.InitLogger(env)
+	defer logger.Sync()
 }
